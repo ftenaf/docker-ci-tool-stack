@@ -1,3 +1,10 @@
+Forked from git@github.com:marcelbirkner/docker-ci-tool-stack.git, thanks so much.
+
+This minor modifications are just for having last version of Gitlab and postgress as well as some minor modifications for using environment variables to store passwords. 
+TODO
+Change the CHANGE_ME text for references to environment variables inside every container if possible.
+
+
 # CI Tools Demo
 
 This GitHub repository contains Dockerfiles for running a set of Continuous Integration Tools with a single command.
@@ -22,7 +29,7 @@ default   *        virtualbox   Running   tcp://192.168.99.100:2376
 ```
 
 ### Step 1 - Stop your docker VM
-
+define environment variables for DB_PASSWD and SMTP_PASSWD. Remember to replace every CHANGE_ME text for the DB_PASSWD defined.
 ```
 docker-machine stop default
 ```
@@ -44,7 +51,7 @@ docker-machine start default
 To get all docker containers up and running use:
 
 ```
-git clone git@github.com:marcelbirkner/docker-ci-tool-stack.git
+git clone https://github.com/ftenaf/docker-ci-tool-stack.git
 cd docker-ci-tool-stack
 docker-compose up
 ```
