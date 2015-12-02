@@ -18,7 +18,7 @@
                 jdbc:postgresql://${DOCKERCITOOLSTACK_SONAR_1_PORT_5432_TCP_ADDR}:${DOCKERCITOOLSTACK_SONAR_1_PORT_5432_TCP_PORT}/sonar
               </sonar.jdbc.url>
               <sonar.jdbc.username>sonar</sonar.jdbc.username>
-              <sonar.jdbc.password>sonar</sonar.jdbc.password>
+              <sonar.jdbc.password>CHANGE_ME</sonar.jdbc.password>
               <sonar.jdbc.driverClassName>org.postgresql.Driver</sonar.jdbc.driverClassName>
               <!-- Optional URL to server. Default value is http://localhost:9000 -->
               <sonar.host.url>http://${DOCKERCITOOLSTACK_SONAR_1_PORT_5432_TCP_ADDR}:9000</sonar.host.url>
