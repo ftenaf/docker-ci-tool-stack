@@ -25,7 +25,7 @@ db:
   net: container:sonar
   environment:
    - POSTGRES_USER=sonar
-   - POSTGRES_PASSWORD=sonar
+   - POSTGRES_PASSWORD=${DB_PASS}
 
 selhub:
   image: selenium/hub
@@ -47,15 +47,15 @@ nodechrome:
     - selhub:hub
 
 postgresql:
-  image: sameersbn/postgresql:9.4-3
+  image: sameersbn/postgresql:9.4-8
   environment:
     - DB_USER=gitlab
-    - DB_PASS=password
+    - DB_PASS={DB_PASSWD}
     - DB_NAME=gitlabhq_production
   volumes:
     - /srv/docker/gitlab/postgresql:/var/lib/postgresql
 gitlab:
-  image: sameersbn/gitlab:8.0.3
+  image: sameersbn/gitlab:8.2.1-1
   links:
     - redis:redisio
     - postgresql:postgresql
@@ -63,8 +63,8 @@ gitlab:
     - "10080:80"
     - "10022:22"
   environment:
-    - TZ=Europe/Berlin
-    - GITLAB_TIMEZONE=Berlin
+    - TZ=Europe/London
+    - GITLAB_TIMEZONE=London
 
     - GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alphanumeric-string
 
@@ -75,19 +75,19 @@ gitlab:
     - GITLAB_NOTIFY_ON_BROKEN_BUILDS=true
     - GITLAB_NOTIFY_PUSHER=false
 
-    - GITLAB_EMAIL=notifications@example.com
-    - GITLAB_EMAIL_REPLY_TO=noreply@example.com
-    - GITLAB_INCOMING_EMAIL_ADDRESS=reply@example.com
+    - GITLAB_EMAIL=francisco.tena@gmail.com
+    - GITLAB_EMAIL_REPLY_TO=francisco.tena@gmail.com
+    - GITLAB_INCOMING_EMAIL_ADDRESS=francisco.tena@gmail.com
 
     - GITLAB_BACKUPS=daily
     - GITLAB_BACKUP_TIME=01:00
 
-    - SMTP_ENABLED=false
+    - SMTP_ENABLED=true
     - SMTP_DOMAIN=www.example.com
     - SMTP_HOST=smtp.gmail.com
     - SMTP_PORT=587
-    - SMTP_USER=mailer@example.com
-    - SMTP_PASS=password
+    - SMTP_USER=francisco.tena@gmail.com
+    - SMTP_PASS=${SMTP_PASSWD}
     - SMTP_STARTTLS=true
     - SMTP_AUTHENTICATION=login
 
