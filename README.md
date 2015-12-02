@@ -1,6 +1,8 @@
 Forked from git@github.com:marcelbirkner/docker-ci-tool-stack.git, thanks so much.
 
 This minor modifications are just for having last version of Gitlab and postgress as well as some minor modifications for using environment variables to store passwords. 
+
+
 TODO
 Change the CHANGE_ME text for references to environment variables inside every container if possible.
 
