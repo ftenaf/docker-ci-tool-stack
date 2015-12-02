@@ -1,4 +1,4 @@
-Forked from git@github.com:marcelbirkner/docker-ci-tool-stack.git, thanks so much.
+Forked from https://github.com/marcelbirkner/docker-ci-tool-stack, thanks so much.
 
 This minor modifications are just for having last version of Gitlab and postgress as well as some minor modifications for using environment variables to store passwords. 
 
