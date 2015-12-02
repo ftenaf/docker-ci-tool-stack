@@ -25,7 +25,7 @@ db:
   net: container:sonar
   environment:
    - POSTGRES_USER=sonar
-   - POSTGRES_PASSWORD=${DB_PASS}
+   - POSTGRES_PASSWORD=${DB_PASSWD}
 
 selhub:
   image: selenium/hub
