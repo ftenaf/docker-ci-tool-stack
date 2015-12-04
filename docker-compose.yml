@@ -1,28 +1,42 @@
+
 env_file:
   - ./common.env
   - ./gitlab.env
   - /opt/secrets.env
+
+redis:
+  image: sameersbn/redis:latest
+  volumes:
+    - /srv/docker/gitlab/redis:/var/lib/redis
+
+postgresql:
+  image: sameersbn/postgresql:9.4-8
+  volumes:
+    - /srv/docker/gitlab/postgresql:/var/lib/postgresql
 
 nexus:
   build: ./nexus
   ports:
     - "18081:8081"
 
-jenkins:
-  build: ./jenkins
-  ports:
-    - "18080:8080"
+gitlab:
+  image: sameersbn/gitlab:8.2.1-1
   links:
-    - nexus:nexus
-    - gitlab:gitlab
-    - sonar:sonar
-    - selhub:hub
-
+    - redis:redisio
+    - postgresql:postgresql
+  ports:
+    - "10080:80"
+    - "10022:22"
+  volumes:
+    - /srv/docker/gitlab/gitlab:/home/git/data
+    
 sonar:
   build: ./sonar
   ports:
    - "19000:9000"
    - "5432:5432"
+  links:
+   - postgresql:postgresql
   
 db:
   image: postgres
@@ -47,23 +61,12 @@ nodechrome:
   links:
     - selhub:hub
 
-postgresql:
-  image: sameersbn/postgresql:9.4-8
-  volumes:
-    - /srv/docker/gitlab/postgresql:/var/lib/postgresql
-
-gitlab:
-  image: sameersbn/gitlab:8.2.1-1
-  links:
-    - redis:redisio
-    - postgresql:postgresql
+jenkins:
+  build: ./jenkins
   ports:
-    - "10080:80"
-    - "10022:22"
-  volumes:
-    - /srv/docker/gitlab/gitlab:/home/git/data
-
-redis:
-  image: sameersbn/redis:latest
-  volumes:
-    - /srv/docker/gitlab/redis:/var/lib/redis
+    - "18080:8080"
+  links:
+    - nexus:nexus
+    - gitlab:gitlab
+    - sonar:sonar
+    - selhub:hub
